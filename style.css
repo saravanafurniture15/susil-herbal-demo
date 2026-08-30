@@ -1,360 +1,354 @@
-const products = [
-    {
-        id: 1,
-        name: "Herbal Wellness Powder",
-        category: "herbal",
-        description: "Premium natural herbal wellness product.",
-        mrp: 499,
-        price: 349,
-        image: "https://images.unsplash.com/photo-1611071532027-1d5d6f8b5c1e?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-        id: 2,
-        name: "Natural Herbal Leaves",
-        category: "herbal",
-        description: "Selected natural herbal ingredients.",
-        mrp: 399,
-        price: 299,
-        image: "https://images.unsplash.com/photo-1515586000433-45406d8e6662?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-        id: 3,
-        name: "Herbal Skin Care",
-        category: "care",
-        description: "Natural herbal skin care product.",
-        mrp: 599,
-        price: 449,
-        image: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-        id: 4,
-        name: "Natural Care Oil",
-        category: "care",
-        description: "Natural herbal care oil.",
-        mrp: 450,
-        price: 325,
-        image: "https://images.unsplash.com/photo-1608571423539-e951a5e4f4b6?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-        id: 5,
-        name: "Premium Herbal Product",
-        category: "herbal",
-        description: "Carefully selected premium herbal product.",
-        mrp: 699,
-        price: 499,
-        image: "https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-        id: 6,
-        name: "Organic Herbal Care",
-        category: "care",
-        description: "Everyday natural herbal care product.",
-        mrp: 550,
-        price: 399,
-        image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=800&q=80"
-    }
-];
-
-let cart = [];
-
-
-/* LOAD PRODUCTS */
-
-function loadProducts(list = products) {
-
-    const grid = document.getElementById("productGrid");
-
-    grid.innerHTML = "";
-
-    list.forEach(product => {
-
-        const discount = Math.round(
-            ((product.mrp - product.price) / product.mrp) * 100
-        );
-
-        const card = document.createElement("div");
-
-        card.className = "product-card";
-
-        card.innerHTML = `
-            <div class="product-image-wrap">
-
-                <span class="discount-badge">
-                    ${discount}% OFF
-                </span>
-
-                <img
-                    class="product-image"
-                    src="${product.image}"
-                    alt="${product.name}"
-                >
-
-            </div>
-
-            <div class="product-info">
-
-                <span class="product-category">
-                    ${product.category}
-                </span>
-
-                <h3>${product.name}</h3>
-
-                <p>${product.description}</p>
-
-                <div class="price">
-                    <strong>₹${product.price}</strong>
-                    <del>₹${product.mrp}</del>
-                </div>
-
-                <div class="product-actions">
-
-                    <button
-                        class="details-btn"
-                        onclick="viewProduct(${product.id})">
-                        View Details
-                    </button>
-
-                    <button
-                        class="product-btn"
-                        onclick="addToCart(${product.id})">
-                        Add Enquiry
-                    </button>
-
-                </div>
-
-            </div>
-        `;
-
-        grid.appendChild(card);
-
-    });
+ {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-
-/* FILTER */
-
-function filterProducts(category) {
-
-    document.querySelectorAll(".filter")
-        .forEach(button => button.classList.remove("active"));
-
-    event.target.classList.add("active");
-
-    if (category === "all") {
-        loadProducts(products);
-    } else {
-
-        const filtered = products.filter(
-            product => product.category === category
-        );
-
-        loadProducts(filtered);
-    }
+html {
+    scroll-behavior: smooth;
 }
 
-
-/* VIEW PRODUCT */
-
-function viewProduct(id) {
-
-    const product = products.find(
-        product => product.id === id
-    );
-
-    const discount = Math.round(
-        ((product.mrp - product.price) / product.mrp) * 100
-    );
-
-    alert(
-        product.name +
-        "\n\n" +
-        product.description +
-        "\n\nMRP: ₹" +
-        product.mrp +
-        "\nOffer Price: ₹" +
-        product.price +
-        "\nDiscount: " +
-        discount +
-        "%"
-    );
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f8f6ef;
+    color: #333;
+    line-height: 1.6;
 }
 
-
-/* ADD TO ENQUIRY */
-
-function addToCart(id) {
-
-    const product = products.find(
-        product => product.id === id
-    );
-
-    cart.push(product);
-
-    updateCart();
-
-    alert(product.name + " added to enquiry.");
+/* HEADER */
+header {
+    background: #174d32;
+    color: white;
+    padding: 15px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-
-/* UPDATE CART */
-
-function updateCart() {
-
-    document.getElementById("cartCount").textContent =
-        cart.length;
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+    color: #f4d35e;
 }
 
-
-/* OPEN CART */
-
-function openCart() {
-
-    const modal =
-        document.getElementById("cartModal");
-
-    const items =
-        document.getElementById("cartItems");
-
-    modal.style.display = "block";
-
-    if (cart.length === 0) {
-
-        items.innerHTML =
-            "<p>No products selected yet.</p>";
-
-        return;
-    }
-
-    items.innerHTML = cart.map((item, index) => `
-
-        <div class="cart-item">
-
-            <div>
-                <strong>${item.name}</strong>
-                <br>
-                <small>₹${item.price}</small>
-            </div>
-
-            <button onclick="removeItem(${index})">
-                ❌
-            </button>
-
-        </div>
-
-    `).join("");
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: 600;
 }
 
-
-/* CLOSE CART */
-
-function closeCart() {
-
-    document.getElementById("cartModal")
-        .style.display = "none";
+nav a:hover {
+    color: #f4d35e;
 }
 
+/* HERO */
+.hero {
+    min-height: 420px;
+    padding: 70px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 
-/* REMOVE ITEM */
+    background-image:
+        linear-gradient(rgba(0, 60, 30, 0.55), rgba(0, 60, 30, 0.55)),
+        url("https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1600&q=80");
 
-function removeItem(index) {
-
-    cart.splice(index, 1);
-
-    updateCart();
-
-    openCart();
+    background-size: cover;
+    background-position: center;
 }
 
+.hero-content {
+    max-width: 750px;
+    color: white;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 20px;
+    margin-bottom: 25px;
+}
+
+/* BUTTON */
+.btn {
+    display: inline-block;
+    background: #f4d35e;
+    color: #174d32;
+    padding: 12px 25px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #ffffff;
+}
+
+/* SECTION */
+section {
+    padding: 55px 5%;
+}
+
+.section-title {
+    text-align: center;
+    color: #174d32;
+    font-size: 32px;
+    margin-bottom: 30px;
+}
+
+/* CATEGORIES */
+.categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 20px;
+}
+
+.category-card {
+    background: white;
+    border-radius: 12px;
+    padding: 25px 15px;
+    text-align: center;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
+
+.category-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+    margin-bottom: 12px;
+}
+
+/* PRODUCTS */
+#products {
+    background: #ffffff;
+}
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+}
+
+/* PRODUCT CARD */
+.product-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.10);
+    transition: transform 0.2s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+/* IMPORTANT: PRODUCT IMAGE */
+.product-card img {
+    width: 100%;
+    height: 230px;
+    object-fit: contain;
+    display: block;
+    background: #f5f5f5;
+}
+
+/* If image is used as background */
+.product-image {
+    width: 100%;
+    height: 230px;
+    object-fit: contain;
+    display: block;
+    background: #f5f5f5;
+}
+
+/* PRODUCT DETAILS */
+.product-info {
+    padding: 18px;
+}
+
+.product-info h3 {
+    color: #174d32;
+    font-size: 19px;
+    margin-bottom: 8px;
+}
+
+.product-info p {
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.price {
+    color: #b8860b;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px 0;
+}
 
 /* WHATSAPP */
-
-function sendWhatsApp() {
-
-    const name =
-        document.getElementById("customerName")
-        .value.trim();
-
-    const phone =
-        document.getElementById("customerPhone")
-        .value.trim();
-
-    const message =
-        document.getElementById("customerMessage")
-        .value.trim();
-
-
-    if (!name || !phone) {
-
-        alert(
-            "Please enter your name and mobile number."
-        );
-
-        return;
-    }
-
-
-    if (cart.length === 0) {
-
-        alert(
-            "Please select at least one product."
-        );
-
-        return;
-    }
-
-
-    const productList = cart
-        .map((item, index) =>
-            `${index + 1}. ${item.name} - ₹${item.price}`
-        )
-        .join("\n");
-
-
-    const text =
-
-`Hello Susil Herbal Products,
-
-I would like to enquire about these products:
-
-${productList}
-
-Customer Name: ${name}
-Mobile: ${phone}
-
-Message:
-${message}`;
-
-
-    /*
-       IMPORTANT:
-       Replace this number with
-       client's actual WhatsApp number.
-    */
-
-    const whatsappNumber = "919999999999";
-
-
-    const url =
-        "https://wa.me/" +
-        whatsappNumber +
-        "?text=" +
-        encodeURIComponent(text);
-
-
-    window.open(url, "_blank");
+.whatsapp-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: #25D366;
+    color: white;
+    padding: 11px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 10px;
 }
 
-
-/* MOBILE MENU */
-
-function toggleMenu() {
-
-    document
-        .getElementById("navMenu")
-        .classList.toggle("show");
+.whatsapp-btn:hover {
+    opacity: 0.9;
 }
 
+/* ABOUT */
+.about {
+    max-width: 900px;
+    margin: auto;
+    text-align: center;
+}
 
-/* START */
+.about p {
+    font-size: 17px;
+    color: #555;
+}
 
-loadProducts();
+/* CONTACT */
+.contact {
+    background: #174d32;
+    color: white;
+    text-align: center;
+}
+
+.contact .section-title {
+    color: #f4d35e;
+}
+
+.contact p {
+    margin: 8px 0;
+    font-size: 17px;
+}
+
+/* FOOTER */
+footer {
+    background: #0e2f20;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+/* IMAGE FALLBACK */
+img {
+    max-width: 100%;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+
+    header {
+        flex-direction: column;
+        gap: 10px;
+        padding: 12px 4%;
+    }
+
+    .logo {
+        font-size: 22px;
+    }
+
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    nav a {
+        margin-left: 0;
+        font-size: 14px;
+    }
+
+    .hero {
+        min-height: 380px;
+        padding: 50px 20px;
+    }
+
+    .hero h1 {
+        font-size: 34px;
+    }
+
+    .hero p {
+        font-size: 17px;
+    }
+
+    section {
+        padding: 40px 15px;
+    }
+
+    .section-title {
+        font-size: 27px;
+    }
+
+    .products {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .product-card img,
+    .product-image {
+        height: 180px;
+    }
+
+    .product-info {
+        padding: 12px;
+    }
+
+    .product-info h3 {
+        font-size: 16px;
+    }
+
+    .price {
+        font-size: 17px;
+    }
+
+    .categories {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .category-card {
+        padding: 12px;
+    }
+
+    .category-card img {
+        height: 120px;
+    }
+}
+
+/* SMALL MOBILE */
+@media (max-width: 400px) {
+
+    .products {
+        grid-template-columns: 1fr;
+    }
+
+    .product-card img,
+    .product-image {
+        height: 240px;
+    }
+
+    .hero h1 {
+        font-size: 29px;
+    }
+}
