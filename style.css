@@ -1,54 +1,58 @@
-```javascript
 const products = [
-
     {
         id: 1,
         name: "Herbal Wellness Powder",
         category: "herbal",
-        description: "Natural herbal wellness product",
+        description: "Premium natural herbal wellness product.",
+        mrp: 499,
+        price: 349,
         image: "https://images.unsplash.com/photo-1611071532027-1d5d6f8b5c1e?auto=format&fit=crop&w=800&q=80"
     },
-
     {
         id: 2,
         name: "Natural Herbal Leaves",
         category: "herbal",
-        description: "Selected natural herbal ingredients",
+        description: "Selected natural herbal ingredients.",
+        mrp: 399,
+        price: 299,
         image: "https://images.unsplash.com/photo-1515586000433-45406d8e6662?auto=format&fit=crop&w=800&q=80"
     },
-
     {
         id: 3,
         name: "Herbal Skin Care",
         category: "care",
-        description: "Natural care product",
+        description: "Natural herbal skin care product.",
+        mrp: 599,
+        price: 449,
         image: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=800&q=80"
     },
-
     {
         id: 4,
         name: "Natural Care Oil",
         category: "care",
-        description: "Natural herbal care oil",
+        description: "Natural herbal care oil.",
+        mrp: 450,
+        price: 325,
         image: "https://images.unsplash.com/photo-1608571423539-e951a5e4f4b6?auto=format&fit=crop&w=800&q=80"
     },
-
     {
         id: 5,
-        name: "Herbal Natural Product",
+        name: "Premium Herbal Product",
         category: "herbal",
-        description: "Premium natural herbal product",
+        description: "Carefully selected premium herbal product.",
+        mrp: 699,
+        price: 499,
         image: "https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?auto=format&fit=crop&w=800&q=80"
     },
-
     {
         id: 6,
         name: "Organic Herbal Care",
         category: "care",
-        description: "Everyday natural herbal care",
+        description: "Everyday natural herbal care product.",
+        mrp: 550,
+        price: 399,
         image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=800&q=80"
     }
-
 ];
 
 let cart = [];
@@ -64,16 +68,28 @@ function loadProducts(list = products) {
 
     list.forEach(product => {
 
+        const discount = Math.round(
+            ((product.mrp - product.price) / product.mrp) * 100
+        );
+
         const card = document.createElement("div");
 
         card.className = "product-card";
 
         card.innerHTML = `
-            <img
-                class="product-image"
-                src="${product.image}"
-                alt="${product.name}"
-            >
+            <div class="product-image-wrap">
+
+                <span class="discount-badge">
+                    ${discount}% OFF
+                </span>
+
+                <img
+                    class="product-image"
+                    src="${product.image}"
+                    alt="${product.name}"
+                >
+
+            </div>
 
             <div class="product-info">
 
@@ -85,11 +101,26 @@ function loadProducts(list = products) {
 
                 <p>${product.description}</p>
 
-                <button
-                    class="product-btn"
-                    onclick="addToCart(${product.id})">
-                    Add Enquiry
-                </button>
+                <div class="price">
+                    <strong>₹${product.price}</strong>
+                    <del>₹${product.mrp}</del>
+                </div>
+
+                <div class="product-actions">
+
+                    <button
+                        class="details-btn"
+                        onclick="viewProduct(${product.id})">
+                        View Details
+                    </button>
+
+                    <button
+                        class="product-btn"
+                        onclick="addToCart(${product.id})">
+                        Add Enquiry
+                    </button>
+
+                </div>
 
             </div>
         `;
@@ -110,9 +141,7 @@ function filterProducts(category) {
     event.target.classList.add("active");
 
     if (category === "all") {
-
         loadProducts(products);
-
     } else {
 
         const filtered = products.filter(
@@ -124,7 +153,34 @@ function filterProducts(category) {
 }
 
 
-/* CART */
+/* VIEW PRODUCT */
+
+function viewProduct(id) {
+
+    const product = products.find(
+        product => product.id === id
+    );
+
+    const discount = Math.round(
+        ((product.mrp - product.price) / product.mrp) * 100
+    );
+
+    alert(
+        product.name +
+        "\n\n" +
+        product.description +
+        "\n\nMRP: ₹" +
+        product.mrp +
+        "\nOffer Price: ₹" +
+        product.price +
+        "\nDiscount: " +
+        discount +
+        "%"
+    );
+}
+
+
+/* ADD TO ENQUIRY */
 
 function addToCart(id) {
 
@@ -140,6 +196,8 @@ function addToCart(id) {
 }
 
 
+/* UPDATE CART */
+
 function updateCart() {
 
     document.getElementById("cartCount").textContent =
@@ -147,19 +205,22 @@ function updateCart() {
 }
 
 
+/* OPEN CART */
+
 function openCart() {
 
-    const modal = document.getElementById("cartModal");
+    const modal =
+        document.getElementById("cartModal");
 
-    const items = document.getElementById("cartItems");
+    const items =
+        document.getElementById("cartItems");
 
     modal.style.display = "block";
 
     if (cart.length === 0) {
 
-        items.innerHTML = `
-            <p>No products selected yet.</p>
-        `;
+        items.innerHTML =
+            "<p>No products selected yet.</p>";
 
         return;
     }
@@ -168,7 +229,11 @@ function openCart() {
 
         <div class="cart-item">
 
-            <span>${item.name}</span>
+            <div>
+                <strong>${item.name}</strong>
+                <br>
+                <small>₹${item.price}</small>
+            </div>
 
             <button onclick="removeItem(${index})">
                 ❌
@@ -180,12 +245,16 @@ function openCart() {
 }
 
 
+/* CLOSE CART */
+
 function closeCart() {
 
     document.getElementById("cartModal")
         .style.display = "none";
 }
 
+
+/* REMOVE ITEM */
 
 function removeItem(index) {
 
@@ -202,33 +271,44 @@ function removeItem(index) {
 function sendWhatsApp() {
 
     const name =
-        document.getElementById("customerName").value.trim();
+        document.getElementById("customerName")
+        .value.trim();
 
     const phone =
-        document.getElementById("customerPhone").value.trim();
+        document.getElementById("customerPhone")
+        .value.trim();
 
     const message =
-        document.getElementById("customerMessage").value.trim();
+        document.getElementById("customerMessage")
+        .value.trim();
+
 
     if (!name || !phone) {
 
-        alert("Please enter your name and mobile number.");
+        alert(
+            "Please enter your name and mobile number."
+        );
 
         return;
     }
+
 
     if (cart.length === 0) {
 
-        alert("Please select at least one product.");
+        alert(
+            "Please select at least one product."
+        );
 
         return;
     }
 
+
     const productList = cart
         .map((item, index) =>
-            `${index + 1}. ${item.name}`
+            `${index + 1}. ${item.name} - ₹${item.price}`
         )
         .join("\n");
+
 
     const text =
 
@@ -244,18 +324,22 @@ Mobile: ${phone}
 Message:
 ${message}`;
 
+
     /*
-      Replace this with the client's
-      actual WhatsApp number.
+       IMPORTANT:
+       Replace this number with
+       client's actual WhatsApp number.
     */
 
     const whatsappNumber = "919999999999";
+
 
     const url =
         "https://wa.me/" +
         whatsappNumber +
         "?text=" +
         encodeURIComponent(text);
+
 
     window.open(url, "_blank");
 }
@@ -274,4 +358,3 @@ function toggleMenu() {
 /* START */
 
 loadProducts();
-```
