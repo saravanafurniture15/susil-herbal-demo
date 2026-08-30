@@ -1,300 +1,544 @@
-const products = [
+// ===============================
+// SUSIL HERBAL - SCRIPT.JS
+// ===============================
 
-    {
-        id: 1,
-        name: "Herbal Product 01",
-        category: "herbal",
-        description: "Natural herbal product",
-        image: "images/product1.jpg"
-    },
-
-    {
-        id: 2,
-        name: "Herbal Product 02",
-        category: "herbal",
-        description: "Carefully selected herbal product",
-        image: "images/product2.jpg"
-    },
-
-    {
-        id: 3,
-        name: "Natural Care 01",
-        category: "care",
-        description: "Natural care product",
-        image: "images/product3.jpg"
-    },
-
-    {
-        id: 4,
-        name: "Natural Care 02",
-        category: "care",
-        description: "Everyday natural care",
-        image: "images/product4.jpg"
-    },
-
-    {
-        id: 5,
-        name: "Herbal Product 03",
-        category: "herbal",
-        description: "Natural herbal product",
-        image: "images/product5.jpg"
-    },
-
-    {
-        id: 6,
-        name: "Herbal Product 04",
-        category: "herbal",
-        description: "Premium herbal product",
-        image: "images/product6.jpg"
-    }
-
-];
-
-
+let products = [];
 let cart = [];
 
+// WhatsApp Number
+// Country code இல்லாமல் number மட்டும்
+const WHATSAPP_NUMBER = "919500244537";
 
-/* LOAD PRODUCTS */
+// ===============================
+// SAMPLE PRODUCTS
+// ===============================
 
-function loadProducts(list = products) {
+const sampleProducts = [
+    {
+        id: 1,
+        name: "Herbal Hair Oil",
+        category: "Hair Care",
+        price: 250,
+        image: "images/product1.jpg"
+    },
+    {
+        id: 2,
+        name: "Herbal Shampoo",
+        category: "Hair Care",
+        price: 220,
+        image: "images/product2.jpg"
+    },
+    {
+        id: 3,
+        name: "Herbal Soap",
+        category: "Skin Care",
+        price: 120,
+        image: "images/product3.jpg"
+    },
+    {
+        id: 4,
+        name: "Herbal Face Cream",
+        category: "Skin Care",
+        price: 280,
+        image: "images/product4.jpg"
+    },
+    {
+        id: 5,
+        name: "Herbal Powder",
+        category: "Health Care",
+        price: 180,
+        image: "images/product5.jpg"
+    },
+    {
+        id: 6,
+        name: "Herbal Juice",
+        category: "Health Care",
+        price: 150,
+        image: "images/product6.jpg"
+    }
+];
 
-    const grid = document.getElementById("productGrid");
+// ===============================
+// PAGE LOAD
+// ===============================
 
-    grid.innerHTML = "";
+document.addEventListener("DOMContentLoaded", function () {
 
-    list.forEach(product => {
+    products = sampleProducts;
 
-        const card = document.createElement("div");
+    displayProducts(products);
+    displayCategories();
+    loadCart();
 
-        card.className = "product-card";
+    updateCart();
 
-        card.innerHTML = `
+    // Search
+    const searchInput = document.getElementById("searchInput");
 
-            <img
-                class="product-image"
-                src="${product.image}"
+    if (searchInput) {
+        searchInput.addEventListener("input", function () {
+
+            const searchText = this.value.toLowerCase();
+
+            const filteredProducts = products.filter(product =>
+                product.name.toLowerCase().includes(searchText) ||
+                product.category.toLowerCase().includes(searchText)
+            );
+
+            displayProducts(filteredProducts);
+        });
+    }
+});
+
+// ===============================
+// DISPLAY PRODUCTS
+// ===============================
+
+function displayProducts(productList) {
+
+    const productsContainer =
+        document.getElementById("products");
+
+    if (!productsContainer) {
+        return;
+    }
+
+    productsContainer.innerHTML = "";
+
+    if (productList.length === 0) {
+
+        productsContainer.innerHTML = `
+            <div style="text-align:center; padding:30px;">
+                <h3>No products found</h3>
+                <p>Please try another search.</p>
+            </div>
+        `;
+
+        return;
+    }
+
+    productList.forEach(product => {
+
+        const productCard = document.createElement("div");
+
+        productCard.className = "product-card";
+
+        productCard.innerHTML = `
+
+            <img 
+                src="${product.image}" 
                 alt="${product.name}"
-                onerror="this.src='images/placeholder.jpg'"
+                onerror="this.src='https://via.placeholder.com/500x500?text=Herbal+Product'"
             >
 
             <div class="product-info">
 
-                <span class="product-category">
-                    ${product.category}
-                </span>
-
                 <h3>${product.name}</h3>
 
-                <p>${product.description}</p>
+                <p>${product.category}</p>
 
-                <button
-                    class="product-btn"
+                <div class="product-price">
+                    ₹${product.price}
+                </div>
+
+                <button 
+                    class="btn"
                     onclick="addToCart(${product.id})">
-                    Add Enquiry
+                    Add to Cart
                 </button>
 
             </div>
         `;
 
-        grid.appendChild(card);
-
+        productsContainer.appendChild(productCard);
     });
-
 }
 
+// ===============================
+// DISPLAY CATEGORIES
+// ===============================
 
-/* FILTER */
+function displayCategories() {
 
-function filterProducts(category) {
+    const categoryContainer =
+        document.getElementById("categories");
 
-    document.querySelectorAll(".filter")
-        .forEach(button => button.classList.remove("active"));
+    if (!categoryContainer) {
+        return;
+    }
 
-    event.target.classList.add("active");
+    const categories = [
+        "All",
+        ...new Set(products.map(product => product.category))
+    ];
 
-    if (category === "all") {
+    categoryContainer.innerHTML = "";
 
-        loadProducts(products);
+    categories.forEach(category => {
+
+        const button = document.createElement("button");
+
+        button.className = "btn";
+
+        button.style.margin = "5px";
+
+        button.textContent = category;
+
+        button.onclick = function () {
+            filterCategory(category);
+        };
+
+        categoryContainer.appendChild(button);
+    });
+}
+
+// ===============================
+// CATEGORY FILTER
+// ===============================
+
+function filterCategory(category) {
+
+    if (category === "All") {
+
+        displayProducts(products);
+
+        return;
+    }
+
+    const filtered = products.filter(
+        product => product.category === category
+    );
+
+    displayProducts(filtered);
+}
+
+// ===============================
+// ADD TO CART
+// ===============================
+
+function addToCart(productId) {
+
+    const product = products.find(
+        item => item.id === productId
+    );
+
+    if (!product) {
+        return;
+    }
+
+    const existingItem = cart.find(
+        item => item.id === productId
+    );
+
+    if (existingItem) {
+
+        existingItem.quantity++;
 
     } else {
 
-        const filtered = products.filter(
-            product => product.category === category
-        );
-
-        loadProducts(filtered);
-
+        cart.push({
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            image: product.image,
+            quantity: 1
+        });
     }
 
-}
-
-
-/* CART */
-
-function addToCart(id) {
-
-    const product = products.find(
-        product => product.id === id
-    );
-
-    cart.push(product);
+    saveCart();
 
     updateCart();
 
-    alert(product.name + " added to enquiry.");
-
+    alert(product.name + " added to cart!");
 }
 
+// ===============================
+// UPDATE CART
+// ===============================
 
 function updateCart() {
 
-    document.getElementById("cartCount").textContent =
-        cart.length;
+    const cartContainer =
+        document.getElementById("cart");
 
-}
+    const cartCount =
+        document.getElementById("cartCount");
 
+    const cartTotal =
+        document.getElementById("cartTotal");
 
-function openCart() {
+    if (!cartContainer) {
+        return;
+    }
 
-    const modal = document.getElementById("cartModal");
+    cartContainer.innerHTML = "";
 
-    const items = document.getElementById("cartItems");
-
-    modal.style.display = "block";
+    let total = 0;
+    let itemCount = 0;
 
     if (cart.length === 0) {
 
-        items.innerHTML = `
-            <p>No products selected yet.</p>
+        cartContainer.innerHTML = `
+            <p style="text-align:center;">
+                Your cart is empty.
+            </p>
         `;
 
-        return;
+    } else {
 
+        cart.forEach(item => {
+
+            const itemTotal =
+                item.price * item.quantity;
+
+            total += itemTotal;
+
+            itemCount += item.quantity;
+
+            const cartItem =
+                document.createElement("div");
+
+            cartItem.className = "cart-item";
+
+            cartItem.innerHTML = `
+
+                <div>
+
+                    <strong>${item.name}</strong>
+
+                    <br>
+
+                    ₹${item.price} × ${item.quantity}
+
+                </div>
+
+                <div>
+
+                    <button 
+                        onclick="decreaseQuantity(${item.id})">
+                        −
+                    </button>
+
+                    <button 
+                        onclick="increaseQuantity(${item.id})">
+                        +
+                    </button>
+
+                    <button 
+                        onclick="removeFromCart(${item.id})">
+                        Remove
+                    </button>
+
+                </div>
+            `;
+
+            cartContainer.appendChild(cartItem);
+        });
     }
 
-    items.innerHTML = cart.map((item, index) => `
+    if (cartCount) {
+        cartCount.textContent = itemCount;
+    }
 
-        <div class="cart-item">
-
-            <span>
-                ${item.name}
-            </span>
-
-            <button onclick="removeItem(${index})">
-                ❌
-            </button>
-
-        </div>
-
-    `).join("");
-
+    if (cartTotal) {
+        cartTotal.textContent =
+            "Total: ₹" + total;
+    }
 }
 
+// ===============================
+// INCREASE QUANTITY
+// ===============================
 
-function closeCart() {
+function increaseQuantity(productId) {
 
-    document.getElementById("cartModal")
-        .style.display = "none";
+    const item = cart.find(
+        item => item.id === productId
+    );
 
+    if (item) {
+
+        item.quantity++;
+
+        saveCart();
+
+        updateCart();
+    }
 }
 
+// ===============================
+// DECREASE QUANTITY
+// ===============================
 
-function removeItem(index) {
+function decreaseQuantity(productId) {
 
-    cart.splice(index, 1);
+    const item = cart.find(
+        item => item.id === productId
+    );
+
+    if (!item) {
+        return;
+    }
+
+    item.quantity--;
+
+    if (item.quantity <= 0) {
+
+        cart = cart.filter(
+            item => item.id !== productId
+        );
+    }
+
+    saveCart();
 
     updateCart();
-
-    openCart();
-
 }
 
+// ===============================
+// REMOVE FROM CART
+// ===============================
 
-/* WHATSAPP */
+function removeFromCart(productId) {
 
-function sendWhatsApp() {
+    cart = cart.filter(
+        item => item.id !== productId
+    );
 
-    const name =
-        document.getElementById("customerName").value.trim();
+    saveCart();
 
-    const phone =
-        document.getElementById("customerPhone").value.trim();
+    updateCart();
+}
 
-    const message =
-        document.getElementById("customerMessage").value.trim();
+// ===============================
+// CLEAR CART
+// ===============================
 
+function clearCart() {
 
-    if (!name || !phone) {
+    cart = [];
 
-        alert("Please enter your name and mobile number.");
+    saveCart();
 
-        return;
+    updateCart();
+}
 
+// ===============================
+// SAVE CART
+// ===============================
+
+function saveCart() {
+
+    localStorage.setItem(
+        "susilHerbalCart",
+        JSON.stringify(cart)
+    );
+}
+
+// ===============================
+// LOAD CART
+// ===============================
+
+function loadCart() {
+
+    const savedCart =
+        localStorage.getItem("susilHerbalCart");
+
+    if (savedCart) {
+
+        try {
+
+            cart = JSON.parse(savedCart);
+
+        } catch (error) {
+
+            cart = [];
+        }
     }
+}
 
+// ===============================
+// WHATSAPP ORDER
+// ===============================
+
+function orderOnWhatsApp() {
 
     if (cart.length === 0) {
 
-        alert("Please select at least one product.");
+        alert("Please add products to cart first.");
 
         return;
-
     }
 
+    let message =
+        "Hello SUSIL HERBAL,%0A%0A";
 
-    const productList = cart
-        .map((item, index) =>
-            `${index + 1}. ${item.name}`
-        )
-        .join("\n");
+    message +=
+        "I would like to place an order:%0A%0A";
 
+    let total = 0;
 
-    const text =
+    cart.forEach((item, index) => {
 
-`Hello Susil Herbal Products,
+        const itemTotal =
+            item.price * item.quantity;
 
-I would like to enquire about these products:
+        total += itemTotal;
 
-${productList}
+        message +=
+            `${index + 1}. ${item.name}%0A`;
 
-Customer Name: ${name}
-Mobile: ${phone}
+        message +=
+            `Qty: ${item.quantity}%0A`;
 
-Message:
-${message}`;
+        message +=
+            `Price: ₹${item.price}%0A`;
 
+        message +=
+            `Subtotal: ₹${itemTotal}%0A%0A`;
+    });
 
-    /*
-       IMPORTANT:
-       Replace 919999999999 with
-       the client's WhatsApp number.
-    */
+    message +=
+        `Total: ₹${total}%0A%0A`;
 
-    const whatsappNumber = "919999999999";
+    message +=
+        "Please contact me for order confirmation.";
 
-    const url =
-        "https://wa.me/" +
-        whatsappNumber +
-        "?text=" +
-        encodeURIComponent(text);
+    const whatsappURL =
+        `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
 
-
-    window.open(url, "_blank");
-
+    window.open(whatsappURL, "_blank");
 }
 
+// ===============================
+// SCROLL TO PRODUCTS
+// ===============================
 
-/* MOBILE MENU */
+function showProducts() {
 
-function toggleMenu() {
+    const section =
+        document.getElementById("productsSection");
 
-    document
-        .getElementById("navMenu")
-        .classList.toggle("show");
+    if (section) {
 
+        section.scrollIntoView({
+            behavior: "smooth"
+        });
+    }
 }
 
+// ===============================
+// CART BUTTON
+// ===============================
 
-/* START */
+function showCart() {
 
-loadProducts();
+    const section =
+        document.getElementById("cartSection");
+
+    if (section) {
+
+        section.scrollIntoView({
+            behavior: "smooth"
+        });
+    }
+}
