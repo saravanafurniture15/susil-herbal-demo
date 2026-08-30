@@ -1,29 +1,22 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Susil Herbal Products</title>
-    <meta name="description" content="Susil Herbal Products - Natural Herbal Products">
+    <title>Susil Herbal | Natural Herbal Products</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header class="header">
-    <div class="logo">
-        <span>🌿</span>
-        <div>
-            <h2>Susil Herbal</h2>
-            <small>Natural Products</small>
-        </div>
-    </div>
+<!-- HEADER -->
+<header>
+    <div class="logo">🌿 SUSIL HERBAL</div>
 
-    <button class="menu-btn" onclick="toggleMenu()">☰</button>
-
-    <nav id="navMenu">
+    <nav>
         <a href="#home">Home</a>
         <a href="#categories">Categories</a>
         <a href="#products">Products</a>
@@ -34,70 +27,75 @@
 
 
 <!-- HERO -->
-
 <section id="home" class="hero">
 
     <div class="hero-content">
-        <span class="hero-tag">🌿 100% Natural Products</span>
 
-        <h1>
-            Nature's Goodness<br>
-            <strong>For Your Better Life</strong>
-        </h1>
+        <h1>Natural Herbal Products</h1>
 
         <p>
-            Discover our range of carefully selected herbal
-            and natural products for everyday wellness.
+            Pure • Natural • Traditional • Healthy
         </p>
 
-        <div class="hero-buttons">
-            <a href="#products" class="btn primary">Explore Products</a>
-            <a href="#contact" class="btn secondary">Contact Us</a>
-        </div>
-    </div>
+        <a href="#products" class="btn">
+            Shop Now
+        </a>
 
-    <div class="hero-image">
-        <!-- Replace this image with your homepage design/image -->
-        <img src="images/hero.jpg" alt="Susil Herbal Products">
     </div>
 
 </section>
 
 
 <!-- CATEGORIES -->
+<section id="categories">
 
-<section id="categories" class="section">
-
-    <div class="section-title">
-        <span>OUR COLLECTION</span>
-        <h2>Shop By Category</h2>
-        <p>Explore our natural herbal product collections.</p>
-    </div>
+    <h2 class="section-title">
+        Our Categories
+    </h2>
 
     <div class="categories">
 
         <div class="category-card">
-            <div class="category-icon">🌿</div>
+
+            <img
+                src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=600&q=80"
+                alt="Herbal Oils">
+
+            <h3>Herbal Oils</h3>
+
+        </div>
+
+
+        <div class="category-card">
+
+            <img
+                src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=600&q=80"
+                alt="Herbal Products">
+
             <h3>Herbal Products</h3>
-            <p>Natural herbal products</p>
+
         </div>
 
-        <div class="category-card">
-            <div class="category-icon">🍃</div>
-            <h3>Natural Care</h3>
-            <p>Everyday natural care</p>
-        </div>
 
         <div class="category-card">
-            <div class="category-icon">🌱</div>
-            <h3>Wellness</h3>
-            <p>Products for wellness</p>
+
+            <img
+                src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=600&q=80"
+                alt="Natural Products">
+
+            <h3>Natural Products</h3>
+
         </div>
 
+
         <div class="category-card">
-            <div class="category-icon">🪴</div>
-            <h3>Special Products</h3>
-            <p>Our selected products</p>
+
+            <img
+                src="https://images.unsplash.com/photo-1611073762224-9fae5f6f5d2c?auto=format&fit=crop&w=600&q=80"
+                alt="Herbal Powder">
+
+            <h3>Herbal Powders</h3>
+
         </div>
 
     </div>
@@ -106,60 +104,166 @@
 
 
 <!-- PRODUCTS -->
+<section id="products">
 
-<section id="products" class="section products-section">
+    <h2 class="section-title">
+        Featured Products
+    </h2>
 
-    <div class="section-title">
-        <span>OUR PRODUCTS</span>
-        <h2>Featured Products</h2>
-        <p>Explore our latest herbal products.</p>
+    <div class="products">
+
+
+        <!-- PRODUCT 1 -->
+        <div class="product-card">
+
+            <img
+                src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=800&q=80"
+                alt="Herbal Oil">
+
+            <div class="product-info">
+
+                <h3>Natural Herbal Oil</h3>
+
+                <p>
+                    Pure herbal oil made from natural ingredients.
+                </p>
+
+                <div class="price">
+                    ₹299
+                </div>
+
+                <a
+                    class="whatsapp-btn"
+                    href="https://wa.me/919500244537?text=Hello%20Susil%20Herbal,%20I%20am%20interested%20in%20Natural%20Herbal%20Oil."
+                    target="_blank">
+
+                    WhatsApp Enquiry
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 2 -->
+        <div class="product-card">
+
+            <img
+                src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=800&q=80"
+                alt="Herbal Product">
+
+            <div class="product-info">
+
+                <h3>Herbal Skin Care</h3>
+
+                <p>
+                    Traditional herbal care for everyday use.
+                </p>
+
+                <div class="price">
+                    ₹399
+                </div>
+
+                <a
+                    class="whatsapp-btn"
+                    href="https://wa.me/919500244537?text=Hello%20Susil%20Herbal,%20I%20am%20interested%20in%20Herbal%20Skin%20Care."
+                    target="_blank">
+
+                    WhatsApp Enquiry
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 3 -->
+        <div class="product-card">
+
+            <img
+                src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80"
+                alt="Natural Herbal Product">
+
+            <div class="product-info">
+
+                <h3>Natural Herbal Care</h3>
+
+                <p>
+                    Natural ingredients with traditional goodness.
+                </p>
+
+                <div class="price">
+                    ₹349
+                </div>
+
+                <a
+                    class="whatsapp-btn"
+                    href="https://wa.me/919500244537?text=Hello%20Susil%20Herbal,%20I%20am%20interested%20in%20Natural%20Herbal%20Care."
+                    target="_blank">
+
+                    WhatsApp Enquiry
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 4 -->
+        <div class="product-card">
+
+            <img
+                src="https://images.unsplash.com/photo-1611073762224-9fae5f6f5d2c?auto=format&fit=crop&w=800&q=80"
+                alt="Herbal Powder">
+
+            <div class="product-info">
+
+                <h3>Herbal Powder</h3>
+
+                <p>
+                    Pure and natural herbal powder.
+                </p>
+
+                <div class="price">
+                    ₹249
+                </div>
+
+                <a
+                    class="whatsapp-btn"
+                    href="https://wa.me/919500244537?text=Hello%20Susil%20Herbal,%20I%20am%20interested%20in%20Herbal%20Powder."
+                    target="_blank">
+
+                    WhatsApp Enquiry
+
+                </a>
+
+            </div>
+
+        </div>
+
     </div>
-
-    <div class="filter-buttons">
-        <button class="filter active" onclick="filterProducts('all')">
-            All
-        </button>
-
-        <button class="filter" onclick="filterProducts('herbal')">
-            Herbal
-        </button>
-
-        <button class="filter" onclick="filterProducts('care')">
-            Natural Care
-        </button>
-    </div>
-
-    <div id="productGrid" class="product-grid"></div>
 
 </section>
 
 
 <!-- ABOUT -->
+<section id="about">
 
-<section id="about" class="about">
+    <div class="about">
 
-    <div class="about-image">
-        <img src="images/about.jpg" alt="About Susil Herbal">
-    </div>
-
-    <div class="about-content">
-
-        <span>ABOUT US</span>
-
-        <h2>Pure. Natural. Trusted.</h2>
+        <h2 class="section-title">
+            About Susil Herbal
+        </h2>
 
         <p>
-            Susil Herbal Products brings together carefully selected
-            natural and herbal products with a focus on quality,
-            freshness and customer satisfaction.
+            Susil Herbal brings natural and traditional herbal products
+            for your everyday wellness and personal care needs.
+            Our focus is on quality, natural ingredients and
+            customer satisfaction.
         </p>
-
-        <div class="about-points">
-            <div>✓ Quality Products</div>
-            <div>✓ Natural Ingredients</div>
-            <div>✓ Customer Satisfaction</div>
-            <div>✓ Trusted Service</div>
-        </div>
 
     </div>
 
@@ -167,91 +271,44 @@
 
 
 <!-- CONTACT -->
-
 <section id="contact" class="contact">
 
-    <div class="section-title">
-        <span>GET IN TOUCH</span>
-        <h2>Contact Us</h2>
-        <p>For product enquiries and orders, contact us.</p>
-    </div>
+    <h2 class="section-title">
+        Contact Us
+    </h2>
 
-    <div class="contact-box">
+    <p>📞 +91 95002 44537</p>
 
-        <div>
-            <div class="contact-icon">📞</div>
-            <h3>Phone</h3>
-            <p>+91 XXXXX XXXXX</p>
-        </div>
+    <p>📧 susilherbal@gmail.com</p>
 
-        <div>
-            <div class="contact-icon">💬</div>
-            <h3>WhatsApp</h3>
-            <p>Send us your enquiry</p>
-        </div>
+    <p>📍 Tamil Nadu, India</p>
 
-        <div>
-            <div class="contact-icon">📍</div>
-            <h3>Location</h3>
-            <p>India</p>
-        </div>
+    <br>
 
-    </div>
+    <a
+        class="btn"
+        href="https://wa.me/919500244537?text=Hello%20Susil%20Herbal,%20I%20want%20to%20know%20more%20about%20your%20products."
+        target="_blank">
+
+        Chat on WhatsApp
+
+    </a>
 
 </section>
 
 
+<!-- FOOTER -->
 <footer>
 
-    <div class="footer-logo">
-        🌿 <strong>Susil Herbal</strong>
-    </div>
-
     <p>
-        © 2026 Susil Herbal Products. All Rights Reserved.
+        © 2026 Susil Herbal. All Rights Reserved.
     </p>
 
 </footer>
-
-
-<!-- CART -->
-
-<div id="cartButton" class="cart-button" onclick="openCart()">
-    🛒 <span id="cartCount">0</span>
-</div>
-
-
-<div id="cartModal" class="modal">
-
-    <div class="modal-content">
-
-        <button class="close" onclick="closeCart()">×</button>
-
-        <h2>Your Enquiry</h2>
-
-        <div id="cartItems"></div>
-
-        <div class="customer-form">
-
-            <input id="customerName" type="text" placeholder="Your Name">
-
-            <input id="customerPhone" type="tel" placeholder="Mobile Number">
-
-            <textarea id="customerMessage"
-                placeholder="Message / Requirements"></textarea>
-
-            <button class="whatsapp-btn" onclick="sendWhatsApp()">
-                💬 Send Enquiry on WhatsApp
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
 
 
 <script src="script.js"></script>
 
 </body>
 </html>
+```
