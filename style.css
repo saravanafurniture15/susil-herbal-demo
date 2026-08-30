@@ -1,564 +1,277 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+```javascript
+const products = [
 
-html {
-    scroll-behavior: smooth;
-}
+    {
+        id: 1,
+        name: "Herbal Wellness Powder",
+        category: "herbal",
+        description: "Natural herbal wellness product",
+        image: "https://images.unsplash.com/photo-1611071532027-1d5d6f8b5c1e?auto=format&fit=crop&w=800&q=80"
+    },
 
-body {
-    font-family: Arial, sans-serif;
-    background: #fbfdf9;
-    color: #243326;
-    line-height: 1.6;
-}
+    {
+        id: 2,
+        name: "Natural Herbal Leaves",
+        category: "herbal",
+        description: "Selected natural herbal ingredients",
+        image: "https://images.unsplash.com/photo-1515586000433-45406d8e6662?auto=format&fit=crop&w=800&q=80"
+    },
 
+    {
+        id: 3,
+        name: "Herbal Skin Care",
+        category: "care",
+        description: "Natural care product",
+        image: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=800&q=80"
+    },
 
-/* HEADER */
+    {
+        id: 4,
+        name: "Natural Care Oil",
+        category: "care",
+        description: "Natural herbal care oil",
+        image: "https://images.unsplash.com/photo-1608571423539-e951a5e4f4b6?auto=format&fit=crop&w=800&q=80"
+    },
 
-.header {
-    height: 75px;
-    padding: 0 6%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: white;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 15px rgba(0,0,0,.06);
-}
+    {
+        id: 5,
+        name: "Herbal Natural Product",
+        category: "herbal",
+        description: "Premium natural herbal product",
+        image: "https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?auto=format&fit=crop&w=800&q=80"
+    },
 
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
+    {
+        id: 6,
+        name: "Organic Herbal Care",
+        category: "care",
+        description: "Everyday natural herbal care",
+        image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=800&q=80"
+    }
 
-.logo span {
-    font-size: 32px;
-}
+];
 
-.logo h2 {
-    font-size: 21px;
-    line-height: 20px;
-}
-
-.logo small {
-    color: #71806f;
-}
-
-nav {
-    display: flex;
-    gap: 28px;
-}
-
-nav a {
-    text-decoration: none;
-    color: #344434;
-    font-weight: 600;
-}
-
-nav a:hover {
-    color: #648b50;
-}
-
-.menu-btn {
-    display: none;
-    border: none;
-    background: none;
-    font-size: 27px;
-}
+let cart = [];
 
 
-/* HERO */
+/* LOAD PRODUCTS */
 
-.hero {
-    min-height: 620px;
-    padding: 70px 7%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: 50px;
-    background: #eef5e9;
-}
+function loadProducts(list = products) {
 
-.hero-content {
-    max-width: 600px;
-}
+    const grid = document.getElementById("productGrid");
 
-.hero-tag {
-    color: #5b824b;
-    font-weight: bold;
-}
+    grid.innerHTML = "";
 
-.hero h1 {
-    font-size: 55px;
-    line-height: 1.1;
-    margin: 20px 0;
-}
+    list.forEach(product => {
 
-.hero h1 strong {
-    color: #5d8a4a;
-}
+        const card = document.createElement("div");
 
-.hero p {
-    color: #667266;
-    font-size: 18px;
-    max-width: 500px;
-}
+        card.className = "product-card";
 
-.hero-buttons {
-    display: flex;
-    gap: 15px;
-    margin-top: 30px;
-}
+        card.innerHTML = `
+            <img
+                class="product-image"
+                src="${product.image}"
+                alt="${product.name}"
+            >
 
-.btn {
-    padding: 14px 25px;
-    border-radius: 30px;
-    text-decoration: none;
-    font-weight: bold;
-}
+            <div class="product-info">
 
-.primary {
-    background: #5e874b;
-    color: white;
-}
+                <span class="product-category">
+                    ${product.category}
+                </span>
 
-.secondary {
-    border: 1px solid #5e874b;
-    color: #5e874b;
-}
+                <h3>${product.name}</h3>
 
-.hero-image img {
-    width: 100%;
-    max-height: 470px;
-    object-fit: cover;
-    border-radius: 25px;
-}
+                <p>${product.description}</p>
 
+                <button
+                    class="product-btn"
+                    onclick="addToCart(${product.id})">
+                    Add Enquiry
+                </button>
 
-/* SECTIONS */
+            </div>
+        `;
 
-.section {
-    padding: 80px 7%;
-}
+        grid.appendChild(card);
 
-.section-title {
-    text-align: center;
-    margin-bottom: 45px;
-}
-
-.section-title span,
-.about-content > span {
-    color: #6b914f;
-    font-size: 13px;
-    font-weight: bold;
-    letter-spacing: 2px;
-}
-
-.section-title h2 {
-    font-size: 38px;
-    margin: 8px 0;
-}
-
-.section-title p {
-    color: #737b73;
-}
-
-
-/* CATEGORIES */
-
-.categories {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-}
-
-.category-card {
-    background: white;
-    padding: 30px 20px;
-    text-align: center;
-    border-radius: 18px;
-    box-shadow: 0 5px 25px rgba(0,0,0,.06);
-    transition: .3s;
-}
-
-.category-card:hover {
-    transform: translateY(-7px);
-}
-
-.category-icon {
-    font-size: 45px;
-    margin-bottom: 12px;
-}
-
-.category-card p {
-    color: #7a8279;
+    });
 }
 
 
 /* FILTER */
 
-.filter-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 35px;
-}
+function filterProducts(category) {
 
-.filter {
-    border: 1px solid #cad8c3;
-    background: white;
-    padding: 10px 20px;
-    border-radius: 25px;
-    cursor: pointer;
-}
+    document.querySelectorAll(".filter")
+        .forEach(button => button.classList.remove("active"));
 
-.filter.active {
-    background: #628d4e;
-    color: white;
-}
+    event.target.classList.add("active");
 
+    if (category === "all") {
 
-/* PRODUCTS */
+        loadProducts(products);
 
-.products-section {
-    background: #f1f6ed;
-}
+    } else {
 
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 22px;
-}
+        const filtered = products.filter(
+            product => product.category === category
+        );
 
-.product-card {
-    background: white;
-    border-radius: 18px;
-    overflow: hidden;
-    box-shadow: 0 5px 20px rgba(0,0,0,.06);
-}
-
-.product-image {
-    width: 100%;
-    height: 240px;
-    object-fit: cover;
-}
-
-.product-info {
-    padding: 18px;
-}
-
-.product-category {
-    font-size: 12px;
-    color: #70935b;
-    text-transform: uppercase;
-}
-
-.product-info h3 {
-    margin: 5px 0;
-}
-
-.product-info p {
-    color: #777;
-    font-size: 14px;
-}
-
-.product-btn {
-    width: 100%;
-    margin-top: 15px;
-    padding: 11px;
-    border: none;
-    border-radius: 25px;
-    background: #638c4f;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-
-/* ABOUT */
-
-.about {
-    padding: 90px 7%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: center;
-}
-
-.about-image img {
-    width: 100%;
-    border-radius: 25px;
-}
-
-.about-content h2 {
-    font-size: 40px;
-    margin: 10px 0 20px;
-}
-
-.about-content p {
-    color: #697269;
-}
-
-.about-points {
-    margin-top: 25px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    font-weight: bold;
-}
-
-
-/* CONTACT */
-
-.contact {
-    padding: 80px 7%;
-    background: #eef5e9;
-}
-
-.contact-box {
-    max-width: 900px;
-    margin: auto;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
-
-.contact-box > div {
-    background: white;
-    padding: 30px;
-    text-align: center;
-    border-radius: 18px;
-}
-
-.contact-icon {
-    font-size: 35px;
-}
-
-.contact-box p {
-    color: #737b73;
-}
-
-
-/* FOOTER */
-
-footer {
-    background: #233325;
-    color: white;
-    text-align: center;
-    padding: 35px 20px;
-}
-
-.footer-logo {
-    font-size: 22px;
-    margin-bottom: 10px;
+        loadProducts(filtered);
+    }
 }
 
 
 /* CART */
 
-.cart-button {
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-    width: 58px;
-    height: 58px;
-    border-radius: 50%;
-    background: #628d4e;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    box-shadow: 0 5px 20px rgba(0,0,0,.2);
-    cursor: pointer;
-    z-index: 2000;
-}
+function addToCart(id) {
 
-#cartCount {
-    position: absolute;
-    right: -4px;
-    top: -5px;
-    background: #d84b4b;
-    width: 22px;
-    height: 22px;
-    font-size: 12px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    const product = products.find(
+        product => product.id === id
+    );
+
+    cart.push(product);
+
+    updateCart();
+
+    alert(product.name + " added to enquiry.");
 }
 
 
-/* MODAL */
+function updateCart() {
 
-.modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,.55);
-    z-index: 3000;
-    padding: 20px;
-}
-
-.modal-content {
-    background: white;
-    max-width: 500px;
-    margin: 5% auto;
-    padding: 30px;
-    border-radius: 20px;
-    max-height: 90vh;
-    overflow-y: auto;
-}
-
-.close {
-    float: right;
-    border: none;
-    background: none;
-    font-size: 30px;
-    cursor: pointer;
-}
-
-.cart-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 12px 0;
-    border-bottom: 1px solid #eee;
-}
-
-.customer-form {
-    margin-top: 20px;
-}
-
-.customer-form input,
-.customer-form textarea {
-    width: 100%;
-    padding: 13px;
-    margin-bottom: 12px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    font-family: inherit;
-}
-
-.customer-form textarea {
-    height: 90px;
-}
-
-.whatsapp-btn {
-    width: 100%;
-    padding: 14px;
-    border: none;
-    border-radius: 25px;
-    background: #25D366;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
+    document.getElementById("cartCount").textContent =
+        cart.length;
 }
 
 
-/* MOBILE */
+function openCart() {
 
-@media (max-width: 800px) {
+    const modal = document.getElementById("cartModal");
 
-    .header {
-        padding: 0 20px;
+    const items = document.getElementById("cartItems");
+
+    modal.style.display = "block";
+
+    if (cart.length === 0) {
+
+        items.innerHTML = `
+            <p>No products selected yet.</p>
+        `;
+
+        return;
     }
 
-    .menu-btn {
-        display: block;
-    }
+    items.innerHTML = cart.map((item, index) => `
 
-    nav {
-        display: none;
-        position: absolute;
-        top: 75px;
-        left: 0;
-        width: 100%;
-        background: white;
-        flex-direction: column;
-        padding: 20px;
-        gap: 18px;
-    }
+        <div class="cart-item">
 
-    nav.show {
-        display: flex;
-    }
+            <span>${item.name}</span>
 
-    .hero {
-        grid-template-columns: 1fr;
-        padding: 45px 20px;
-        text-align: center;
-    }
+            <button onclick="removeItem(${index})">
+                ❌
+            </button>
 
-    .hero h1 {
-        font-size: 38px;
-    }
+        </div>
 
-    .hero p {
-        font-size: 16px;
-    }
-
-    .hero-buttons {
-        justify-content: center;
-    }
-
-    .hero-image {
-        order: -1;
-    }
-
-    .categories {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .product-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-    }
-
-    .product-image {
-        height: 180px;
-    }
-
-    .about {
-        grid-template-columns: 1fr;
-        padding: 60px 20px;
-    }
-
-    .contact-box {
-        grid-template-columns: 1fr;
-    }
-
-    .section {
-        padding: 60px 20px;
-    }
-
-    .section-title h2 {
-        font-size: 30px;
-    }
-
+    `).join("");
 }
 
-@media (max-width: 450px) {
 
-    .categories {
-        grid-template-columns: 1fr;
-    }
+function closeCart() {
 
-    .product-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .product-image {
-        height: 240px;
-    }
-
-    .about-points {
-        grid-template-columns: 1fr;
-    }
-
+    document.getElementById("cartModal")
+        .style.display = "none";
 }
+
+
+function removeItem(index) {
+
+    cart.splice(index, 1);
+
+    updateCart();
+
+    openCart();
+}
+
+
+/* WHATSAPP */
+
+function sendWhatsApp() {
+
+    const name =
+        document.getElementById("customerName").value.trim();
+
+    const phone =
+        document.getElementById("customerPhone").value.trim();
+
+    const message =
+        document.getElementById("customerMessage").value.trim();
+
+    if (!name || !phone) {
+
+        alert("Please enter your name and mobile number.");
+
+        return;
+    }
+
+    if (cart.length === 0) {
+
+        alert("Please select at least one product.");
+
+        return;
+    }
+
+    const productList = cart
+        .map((item, index) =>
+            `${index + 1}. ${item.name}`
+        )
+        .join("\n");
+
+    const text =
+
+`Hello Susil Herbal Products,
+
+I would like to enquire about these products:
+
+${productList}
+
+Customer Name: ${name}
+Mobile: ${phone}
+
+Message:
+${message}`;
+
+    /*
+      Replace this with the client's
+      actual WhatsApp number.
+    */
+
+    const whatsappNumber = "919999999999";
+
+    const url =
+        "https://wa.me/" +
+        whatsappNumber +
+        "?text=" +
+        encodeURIComponent(text);
+
+    window.open(url, "_blank");
+}
+
+
+/* MOBILE MENU */
+
+function toggleMenu() {
+
+    document
+        .getElementById("navMenu")
+        .classList.toggle("show");
+}
+
+
+/* START */
+
+loadProducts();
+```
