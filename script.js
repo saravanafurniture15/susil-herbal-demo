@@ -1,356 +1,489 @@
 ```javascript
-// ==========================================
-// SUSIL HERBAL - DEMO PRODUCT CATALOG
-// Online Images - No image upload required
-// ==========================================
+// ======================================================
+// SUSIL HERBAL - PRODUCT CATALOG
+// ======================================================
+
+
+// ------------------------------------------------------
+// PRODUCT DATA
+// ------------------------------------------------------
 
 const products = [
+
     {
         id: 1,
-        name: "Aloe Vera Herbal Gel",
+        name: "Aloe Vera",
         category: "Skin Care",
         price: "₹299",
-        image: "https://images.unsplash.com/photo-1612817288484-6f916006741a?auto=format&fit=crop&w=800&q=80"
+        image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800"
     },
+
     {
         id: 2,
         name: "Neem Herbal Powder",
         category: "Herbal Powder",
         price: "₹199",
-        image: "https://images.unsplash.com/photo-1615485737651-9e4c5c7c3b4c?auto=format&fit=crop&w=800&q=80"
+        image: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=800"
     },
+
     {
         id: 3,
-        name: "Turmeric Herbal Powder",
+        name: "Turmeric Powder",
         category: "Herbal Powder",
         price: "₹249",
-        image: "https://images.unsplash.com/photo-1615485500704-8e990f9900f7?auto=format&fit=crop&w=800&q=80"
+        image: "https://images.unsplash.com/photo-1615485500704-8e990f9900f7?w=800"
     },
+
     {
         id: 4,
-        name: "Amla Herbal Powder",
-        category: "Hair Care",
+        name: "Amla Powder",
+        category: "Herbal Powder",
         price: "₹299",
-        image: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=800&q=80"
+        image: "https://images.unsplash.com/photo-1598514982901-ae627d1f7c88?w=800"
     },
+
     {
         id: 5,
-        name: "Ashwagandha Powder",
+        name: "Ashwagandha",
         category: "Herbal Powder",
         price: "₹399",
-        image: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=800&q=80"
+        image: "https://images.unsplash.com/photo-1608571423539-e951a9f6f4c8?w=800"
     },
+
     {
         id: 6,
         name: "Tulsi Herbal Tea",
         category: "Herbal Tea",
         price: "₹249",
-        image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=800&q=80"
+        image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800"
     },
+
     {
         id: 7,
-        name: "Moringa Herbal Powder",
+        name: "Moringa Powder",
         category: "Herbal Powder",
         price: "₹299",
-        image: "https://images.unsplash.com/photo-1515586000433-45406d8e6662?auto=format&fit=crop&w=800&q=80"
+        image: "https://images.unsplash.com/photo-1515586000433-45406d8e6662?w=800"
     },
+
     {
         id: 8,
         name: "Herbal Hair Oil",
         category: "Hair Care",
         price: "₹349",
-        image: "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=800&q=80"
+        image: "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=800"
     },
+
     {
         id: 9,
-        name: "Herbal Face Wash",
+        name: "Herbal Face Care",
         category: "Skin Care",
         price: "₹299",
-        image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=800&q=80"
+        image: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=800"
     },
+
     {
         id: 10,
         name: "Herbal Soap",
         category: "Skin Care",
         price: "₹149",
-        image: "https://images.unsplash.com/photo-1607006344380-b6775a0824d7?auto=format&fit=crop&w=800&q=80"
+        image: "https://images.unsplash.com/photo-1607006344380-b6775a0824d7?w=800"
     },
+
     {
         id: 11,
-        name: "Brahmi Herbal Powder",
+        name: "Brahmi Powder",
         category: "Herbal Powder",
         price: "₹299",
-        image: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=800&q=80"
+        image: "https://images.unsplash.com/photo-1515586000433-45406d8e6662?w=800"
     },
+
     {
         id: 12,
-        name: "Shikakai Herbal Powder",
+        name: "Shikakai Powder",
         category: "Hair Care",
         price: "₹249",
-        image: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=800&q=80"
+        image: "https://images.unsplash.com/photo-1559599101-f09722fb4948?w=800"
     }
+
 ];
 
 
-// ==========================================
-// GET PRODUCTS CONTAINER
-// ==========================================
+// ------------------------------------------------------
+// ELEMENTS
+// ------------------------------------------------------
 
-const productsContainer =
-    document.getElementById("products");
+const productsGrid =
+    document.getElementById("productsGrid");
+
+const searchInput =
+    document.getElementById("productSearch");
+
+const categoryFilter =
+    document.getElementById("categoryFilter");
 
 
-// ==========================================
+// ------------------------------------------------------
 // DISPLAY PRODUCTS
-// ==========================================
+// ------------------------------------------------------
 
-function displayProducts(list = products) {
+function displayProducts(productList) {
 
-    if (!productsContainer) {
-        console.error("Products container not found!");
+    if (!productsGrid) {
+        console.error("productsGrid not found");
         return;
     }
 
-    productsContainer.innerHTML = "";
+    productsGrid.innerHTML = "";
 
-    if (list.length === 0) {
-        productsContainer.innerHTML = `
+
+    if (productList.length === 0) {
+
+        productsGrid.innerHTML = `
             <div class="no-products">
                 <h3>No products found</h3>
-                <p>Please try another search.</p>
+                <p>Try another product or category.</p>
             </div>
         `;
+
         return;
     }
 
-    list.forEach(product => {
 
-        const card = document.createElement("div");
+    productList.forEach(product => {
+
+        const card =
+            document.createElement("div");
 
         card.className = "product-card";
 
+
         card.innerHTML = `
+
             <div class="product-image">
+
                 <img
                     src="${product.image}"
                     alt="${product.name}"
                     loading="lazy"
-                    onerror="this.src='https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=800&q=80'"
+                    onerror="imageError(this)"
                 >
-            </div>
 
-            <div class="product-info">
-
-                <span class="product-category">
+                <span class="category-badge">
                     ${product.category}
                 </span>
 
-                <h3>${product.name}</h3>
+            </div>
+
+
+            <div class="product-info">
+
+                <h3>
+                    ${product.name}
+                </h3>
+
+                <p>
+                    Natural Herbal Product
+                </p>
+
 
                 <div class="product-bottom">
 
-                    <span class="product-price">
+                    <strong>
                         ${product.price}
-                    </span>
+                    </strong>
 
                     <button
-                        class="view-btn"
-                        onclick="viewProduct(${product.id})">
-                        View Product
+                        onclick="openProduct(${product.id})">
+                        View
                     </button>
 
                 </div>
 
             </div>
+
         `;
 
-        productsContainer.appendChild(card);
+
+        productsGrid.appendChild(card);
+
     });
+
 }
 
 
-// ==========================================
-// PRODUCT DETAILS
-// ==========================================
+// ------------------------------------------------------
+// IMAGE ERROR HANDLER
+// ------------------------------------------------------
 
-function viewProduct(id) {
+function imageError(img) {
 
-    const product = products.find(p => p.id === id);
+    console.log("Image failed:", img.src);
+
+    img.src =
+        "https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=800";
+
+}
+
+
+// ------------------------------------------------------
+// SEARCH + FILTER
+// ------------------------------------------------------
+
+function filterProducts() {
+
+    const search =
+        searchInput.value
+        .toLowerCase()
+        .trim();
+
+    const category =
+        categoryFilter.value;
+
+
+    const filtered =
+        products.filter(product => {
+
+            const matchesSearch =
+
+                product.name
+                    .toLowerCase()
+                    .includes(search)
+
+                ||
+
+                product.category
+                    .toLowerCase()
+                    .includes(search);
+
+
+            const matchesCategory =
+
+                category === "All"
+
+                ||
+
+                product.category === category;
+
+
+            return (
+                matchesSearch &&
+                matchesCategory
+            );
+
+        });
+
+
+    displayProducts(filtered);
+
+}
+
+
+// ------------------------------------------------------
+// SEARCH EVENT
+// ------------------------------------------------------
+
+if (searchInput) {
+
+    searchInput.addEventListener(
+        "input",
+        filterProducts
+    );
+
+}
+
+
+// ------------------------------------------------------
+// CATEGORY EVENT
+// ------------------------------------------------------
+
+if (categoryFilter) {
+
+    categoryFilter.addEventListener(
+        "change",
+        filterProducts
+    );
+
+}
+
+
+// ------------------------------------------------------
+// PRODUCT POPUP
+// ------------------------------------------------------
+
+function openProduct(id) {
+
+    const product =
+        products.find(
+            item => item.id === id
+        );
+
 
     if (!product) return;
 
-    const modal = document.createElement("div");
 
-    modal.className = "product-modal";
+    const popup =
+        document.createElement("div");
 
-    modal.innerHTML = `
+    popup.className =
+        "product-popup";
 
-        <div class="modal-overlay"
-             onclick="closeProductModal()"></div>
 
-        <div class="modal-content">
+    popup.innerHTML = `
+
+        <div
+            class="popup-overlay"
+            onclick="closePopup()">
+        </div>
+
+
+        <div class="popup-box">
 
             <button
-                class="modal-close"
-                onclick="closeProductModal()">
+                class="popup-close"
+                onclick="closePopup()">
                 ×
             </button>
 
-            <div class="modal-image">
+
+            <div class="popup-image">
+
                 <img
                     src="${product.image}"
-                    alt="${product.name}">
+                    alt="${product.name}"
+                    onerror="imageError(this)"
+                >
+
             </div>
 
-            <div class="modal-details">
 
-                <span class="product-category">
+            <div class="popup-details">
+
+                <span>
                     ${product.category}
                 </span>
 
-                <h2>${product.name}</h2>
+                <h2>
+                    ${product.name}
+                </h2>
 
-                <p class="modal-description">
-                    Premium quality herbal product from
-                    Susil Herbal. Natural ingredients and
-                    carefully selected herbal goodness.
+                <p>
+                    Natural herbal product from
+                    Susil Herbal.
                 </p>
 
-                <div class="modal-price">
+                <h3>
                     ${product.price}
-                </div>
+                </h3>
+
 
                 <button
-                    class="order-btn"
-                    onclick="orderProduct('${product.name}')">
-                    Enquire Now
+                    class="whatsapp-btn"
+                    onclick="whatsappEnquiry('${product.name}')">
+
+                    💬 WhatsApp Enquiry
+
                 </button>
 
             </div>
 
         </div>
+
     `;
 
-    document.body.appendChild(modal);
 
-    document.body.style.overflow = "hidden";
+    document.body.appendChild(popup);
+
+    document.body.style.overflow =
+        "hidden";
+
 }
 
 
-// ==========================================
-// CLOSE MODAL
-// ==========================================
+// ------------------------------------------------------
+// CLOSE POPUP
+// ------------------------------------------------------
 
-function closeProductModal() {
+function closePopup() {
 
-    const modal =
-        document.querySelector(".product-modal");
-
-    if (modal) {
-        modal.remove();
-    }
-
-    document.body.style.overflow = "auto";
-}
-
-
-// ==========================================
-// ENQUIRE BUTTON
-// ==========================================
-
-function orderProduct(productName) {
-
-    const message =
-        `Hello Susil Herbal, I am interested in ${productName}. Please share product details.`;
-
-    const whatsappNumber = "919500245437";
-
-    const url =
-        `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-
-    window.open(url, "_blank");
-}
-
-
-// ==========================================
-// SEARCH PRODUCTS
-// ==========================================
-
-function searchProducts() {
-
-    const searchInput =
-        document.getElementById("productSearch");
-
-    if (!searchInput) return;
-
-    const searchText =
-        searchInput.value.toLowerCase().trim();
-
-    const filtered =
-        products.filter(product =>
-            product.name.toLowerCase().includes(searchText) ||
-            product.category.toLowerCase().includes(searchText)
+    const popup =
+        document.querySelector(
+            ".product-popup"
         );
 
-    displayProducts(filtered);
+
+    if (popup) {
+
+        popup.remove();
+
+    }
+
+
+    document.body.style.overflow =
+        "auto";
+
 }
 
 
-// ==========================================
-// CATEGORY FILTER
-// ==========================================
+// ------------------------------------------------------
+// WHATSAPP
+// ------------------------------------------------------
 
-function filterProducts(category) {
+function whatsappEnquiry(productName) {
 
-    if (category === "All") {
+    const phone =
+        "919500245437";
+
+
+    const message =
+        `Hello Susil Herbal,
+
+I am interested in:
+${productName}
+
+Please share more details.`;
+
+
+    const url =
+        `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+
+
+    window.open(
+        url,
+        "_blank"
+    );
+
+}
+
+
+// ------------------------------------------------------
+// ESC KEY
+// ------------------------------------------------------
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (event.key === "Escape") {
+
+            closePopup();
+
+        }
+
+    }
+);
+
+
+// ------------------------------------------------------
+// INITIAL LOAD
+// ------------------------------------------------------
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
 
         displayProducts(products);
 
-        return;
     }
-
-    const filtered =
-        products.filter(product =>
-            product.category === category
-        );
-
-    displayProducts(filtered);
-}
-
-
-// ==========================================
-// INITIAL LOAD
-// ==========================================
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    displayProducts(products);
-
-    const searchInput =
-        document.getElementById("productSearch");
-
-    if (searchInput) {
-
-        searchInput.addEventListener(
-            "input",
-            searchProducts
-        );
-    }
-
-});
-
-
-// ==========================================
-// ESC KEY CLOSE MODAL
-// ==========================================
-
-document.addEventListener("keydown", function (event) {
-
-    if (event.key === "Escape") {
-
-        closeProductModal();
-
-    }
-
-});
+);
 ```
