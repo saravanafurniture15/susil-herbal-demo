@@ -1,148 +1,435 @@
 ```javascript
-// ======================================================
-// SUSIL HERBAL - PRODUCT CATALOG
-// ======================================================
+// =====================================================
+// SUSIL HERBALS
+// COMPLETE ONLINE PRODUCT CATALOG
+// =====================================================
 
 
-// ------------------------------------------------------
-// PRODUCT DATA
-// ------------------------------------------------------
+// =====================================================
+// IMAGE FUNCTION
+// =====================================================
+
+function onlineImage(keyword, number) {
+
+    const cleanKeyword =
+        keyword
+            .replace(/&/g, "")
+            .replace(/\s+/g, ",");
+
+    return `https://loremflickr.com/700/700/${cleanKeyword}?lock=${number}`;
+}
+
+
+// =====================================================
+// PRODUCT LIST
+// =====================================================
 
 const products = [
 
+    // ================= HAIR CARE =================
+
     {
-        id: 1,
-        name: "Aloe Vera",
+        name: "Hair Oil",
+        category: "Hair Care",
+        image: onlineImage("hair,oil,herbal", 101)
+    },
+
+    {
+        name: "Hair Pack",
+        category: "Hair Care",
+        image: onlineImage("hair,herbal,powder", 102)
+    },
+
+    {
+        name: "Mooligai Shikakai",
+        category: "Hair Care",
+        image: onlineImage("shikakai,herbal", 103)
+    },
+
+
+    // ================= SKIN CARE =================
+
+    {
+        name: "Nalangu Maavu",
         category: "Skin Care",
-        price: "₹299",
-        image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800"
+        image: onlineImage("herbal,powder,skincare", 201)
     },
 
     {
-        id: 2,
-        name: "Neem Herbal Powder",
-        category: "Herbal Powder",
-        price: "₹199",
-        image: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=800"
+        name: "Kasturi Manjal",
+        category: "Skin Care",
+        image: onlineImage("turmeric,powder", 202)
     },
 
     {
-        id: 3,
-        name: "Turmeric Powder",
-        category: "Herbal Powder",
-        price: "₹249",
-        image: "https://images.unsplash.com/photo-1615485500704-8e990f9900f7?w=800"
+        name: "Orange Peel Powder",
+        category: "Skin Care",
+        image: onlineImage("orange,peel,powder", 203)
     },
 
     {
-        id: 4,
-        name: "Amla Powder",
-        category: "Herbal Powder",
-        price: "₹299",
-        image: "https://images.unsplash.com/photo-1598514982901-ae627d1f7c88?w=800"
+        name: "Face Glow Oil",
+        category: "Skin Care",
+        image: onlineImage("face,oil,skincare", 204)
     },
 
     {
-        id: 5,
-        name: "Ashwagandha",
-        category: "Herbal Powder",
-        price: "₹399",
-        image: "https://images.unsplash.com/photo-1608571423539-e951a9f6f4c8?w=800"
+        name: "Potato Powder",
+        category: "Skin Care",
+        image: onlineImage("potato,powder", 205)
     },
 
     {
-        id: 6,
-        name: "Tulsi Herbal Tea",
-        category: "Herbal Tea",
-        price: "₹249",
-        image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800"
+        name: "De-Tan Powder",
+        category: "Skin Care",
+        image: onlineImage("skincare,powder", 206)
     },
 
     {
-        id: 7,
+        name: "Face Brightening Powder",
+        category: "Skin Care",
+        image: onlineImage("face,powder,cosmetic", 207)
+    },
+
+    {
+        name: "Banana Powder",
+        category: "Skin Care",
+        image: onlineImage("banana,powder", 208)
+    },
+
+    {
+        name: "Kuppaimeni Powder",
+        category: "Skin Care",
+        image: onlineImage("herbal,powder,green", 209)
+    },
+
+
+    // ================= FOOD CARE =================
+
+    {
+        name: "Herbal Tea",
+        category: "Food Care",
+        image: onlineImage("herbal,tea", 301)
+    },
+
+    {
+        name: "Health Mix",
+        category: "Food Care",
+        image: onlineImage("health,mix,grain", 302)
+    },
+
+    {
+        name: "Weight Loss Powder",
+        category: "Food Care",
+        image: onlineImage("herbal,powder,food", 303)
+    },
+
+    {
+        name: "Diabetic Powder",
+        category: "Food Care",
+        image: onlineImage("herbal,powder", 304)
+    },
+
+    {
         name: "Moringa Powder",
-        category: "Herbal Powder",
-        price: "₹299",
-        image: "https://images.unsplash.com/photo-1515586000433-45406d8e6662?w=800"
+        category: "Food Care",
+        image: onlineImage("moringa,powder", 305)
     },
 
     {
-        id: 8,
-        name: "Herbal Hair Oil",
-        category: "Hair Care",
-        price: "₹349",
-        image: "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=800"
+        name: "Sprouted Ragi Mix",
+        category: "Food Care",
+        image: onlineImage("ragi,grain,mix", 306)
     },
 
     {
-        id: 9,
-        name: "Herbal Face Care",
-        category: "Skin Care",
-        price: "₹299",
-        image: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=800"
+        name: "Kambu Kanji Mix",
+        category: "Food Care",
+        image: onlineImage("millet,grain,food", 307)
+    },
+
+
+    // ================= FRESH FARM =================
+
+    {
+        name: "Palm Sugar",
+        category: "Fresh Farm",
+        image: onlineImage("palm,sugar", 401)
     },
 
     {
-        id: 10,
-        name: "Herbal Soap",
-        category: "Skin Care",
-        price: "₹149",
-        image: "https://images.unsplash.com/photo-1607006344380-b6775a0824d7?w=800"
+        name: "Moringa Honey",
+        category: "Fresh Farm",
+        image: onlineImage("honey,moringa", 402)
     },
 
     {
-        id: 11,
-        name: "Brahmi Powder",
-        category: "Herbal Powder",
-        price: "₹299",
-        image: "https://images.unsplash.com/photo-1515586000433-45406d8e6662?w=800"
+        name: "Ghee",
+        category: "Fresh Farm",
+        image: onlineImage("ghee,butter", 403)
     },
 
     {
-        id: 12,
-        name: "Shikakai Powder",
-        category: "Hair Care",
-        price: "₹249",
-        image: "https://images.unsplash.com/photo-1559599101-f09722fb4948?w=800"
+        name: "Coconut Oil",
+        category: "Fresh Farm",
+        image: onlineImage("coconut,oil", 404)
+    },
+
+    {
+        name: "Sesame Oil",
+        category: "Fresh Farm",
+        image: onlineImage("sesame,oil", 405)
+    },
+
+    {
+        name: "Groundnut Oil",
+        category: "Fresh Farm",
+        image: onlineImage("groundnut,oil", 406)
+    },
+
+    {
+        name: "Karuppu Kavuni Rice",
+        category: "Fresh Farm",
+        image: onlineImage("black,rice", 407)
+    },
+
+    {
+        name: "Mapillai Samba Rice",
+        category: "Fresh Farm",
+        image: onlineImage("red,rice", 408)
+    },
+
+
+    // ================= NEW LAUNCH =================
+
+    {
+        name: "ABC Malt",
+        category: "New Launch",
+        image: onlineImage("health,drink,malt", 501)
+    },
+
+    {
+        name: "Sweet Potato Powder",
+        category: "New Launch",
+        image: onlineImage("sweet,potato,powder", 502)
+    },
+
+    {
+        name: "Sprouted Chocomalt",
+        category: "New Launch",
+        image: onlineImage("chocolate,malt,drink", 503)
+    },
+
+    {
+        name: "Nellikai Juice Powder",
+        category: "New Launch",
+        image: onlineImage("amla,gooseberry,powder", 504)
+    },
+
+    {
+        name: "Biotin Powder",
+        category: "New Launch",
+        image: onlineImage("herbal,powder", 505)
+    },
+
+    {
+        name: "Hair Growth Laddu",
+        category: "New Launch",
+        image: onlineImage("laddu,sweet", 506)
+    },
+
+    {
+        name: "Butterfly Pea Tea",
+        category: "New Launch",
+        image: onlineImage("butterfly,pea,tea", 507)
+    },
+
+    {
+        name: "Hair Growth Seeds",
+        category: "New Launch",
+        image: onlineImage("herbal,seeds", 508)
+    },
+
+
+    // ================= COSMETIC - FACE =================
+
+    {
+        name: "Rose Day Fairness Cream",
+        category: "Cosmetic Collection",
+        subcategory: "Face Care",
+        image: onlineImage("rose,face,cream", 601)
+    },
+
+    {
+        name: "Magic Serum",
+        category: "Cosmetic Collection",
+        subcategory: "Face Care",
+        image: onlineImage("face,serum,cosmetic", 602)
+    },
+
+    {
+        name: "Walnut Scrub",
+        category: "Cosmetic Collection",
+        subcategory: "Face Care",
+        image: onlineImage("walnut,scrub,cosmetic", 603)
+    },
+
+    {
+        name: "Red Wine Gel",
+        category: "Cosmetic Collection",
+        subcategory: "Face Care",
+        image: onlineImage("face,gel,cosmetic", 604)
+    },
+
+    {
+        name: "Aloe Vera Gel",
+        category: "Cosmetic Collection",
+        subcategory: "Face Care",
+        image: onlineImage("aloe,vera,gel", 605)
+    },
+
+    {
+        name: "Charcoal Face Wash",
+        category: "Cosmetic Collection",
+        subcategory: "Face Care",
+        image: onlineImage("charcoal,face,wash", 606)
+    },
+
+
+    // ================= BODY CARE =================
+
+    {
+        name: "Vetiver Body Wash",
+        category: "Cosmetic Collection",
+        subcategory: "Body Care",
+        image: onlineImage("body,wash,cosmetic", 701)
+    },
+
+    {
+        name: "Herbal Henna Body Lotion",
+        category: "Cosmetic Collection",
+        subcategory: "Body Care",
+        image: onlineImage("body,lotion,herbal", 702)
+    },
+
+    {
+        name: "Narampadi Oil",
+        category: "Cosmetic Collection",
+        subcategory: "Body Care",
+        image: onlineImage("herbal,oil", 703)
+    },
+
+    {
+        name: "Kojic Goat Milk Soap",
+        category: "Cosmetic Collection",
+        subcategory: "Body Care",
+        image: onlineImage("goat,milk,soap", 704)
+    },
+
+    {
+        name: "Nalangu Maavu Soap",
+        category: "Cosmetic Collection",
+        subcategory: "Body Care",
+        image: onlineImage("herbal,soap", 705)
+    },
+
+
+    // ================= LIP CARE =================
+
+    {
+        name: "Beetroot Lip Balm",
+        category: "Cosmetic Collection",
+        subcategory: "Lip Care",
+        image: onlineImage("lip,balm,cosmetic", 801)
+    },
+
+    {
+        name: "Beetroot Lip Scrub",
+        category: "Cosmetic Collection",
+        subcategory: "Lip Care",
+        image: onlineImage("lip,scrub,cosmetic", 802)
+    },
+
+
+    // ================= FOOT CARE =================
+
+    {
+        name: "Foot Crack Cream",
+        category: "Cosmetic Collection",
+        subcategory: "Foot Care",
+        image: onlineImage("foot,cream,skincare", 901)
+    },
+
+    {
+        name: "Foot Soak Salt",
+        category: "Cosmetic Collection",
+        subcategory: "Foot Care",
+        image: onlineImage("bath,salt,spa", 902)
+    },
+
+
+    // ================= HAIR COLLECTION =================
+
+    {
+        name: "Herbal Shampoo",
+        category: "Cosmetic Collection",
+        subcategory: "Hair Care Collection",
+        image: onlineImage("herbal,shampoo", 1001)
+    },
+
+    {
+        name: "Hibiscus Shampoo",
+        category: "Cosmetic Collection",
+        subcategory: "Hair Care Collection",
+        image: onlineImage("hibiscus,shampoo", 1002)
+    },
+
+    {
+        name: "Aloe Vera Baby Shampoo",
+        category: "Cosmetic Collection",
+        subcategory: "Hair Care Collection",
+        image: onlineImage("baby,shampoo,aloe", 1003)
+    },
+
+    {
+        name: "Aloe Vera Hair Conditioner",
+        category: "Cosmetic Collection",
+        subcategory: "Hair Care Collection",
+        image: onlineImage("hair,conditioner,aloe", 1004)
     }
 
 ];
 
 
-// ------------------------------------------------------
+// =====================================================
 // ELEMENTS
-// ------------------------------------------------------
+// =====================================================
 
-const productsGrid =
+const grid =
     document.getElementById("productsGrid");
 
-const searchInput =
-    document.getElementById("productSearch");
+const search =
+    document.getElementById("searchBox");
 
-const categoryFilter =
-    document.getElementById("categoryFilter");
+const select =
+    document.getElementById("categorySelect");
 
 
-// ------------------------------------------------------
+// =====================================================
 // DISPLAY PRODUCTS
-// ------------------------------------------------------
+// =====================================================
 
-function displayProducts(productList) {
+function showProducts(list) {
 
-    if (!productsGrid) {
-        console.error("productsGrid not found");
-        return;
-    }
-
-    productsGrid.innerHTML = "";
+    grid.innerHTML = "";
 
 
-    if (productList.length === 0) {
+    if (list.length === 0) {
 
-        productsGrid.innerHTML = `
+        grid.innerHTML = `
             <div class="no-products">
-                <h3>No products found</h3>
-                <p>Try another product or category.</p>
+                <h2>No Products Found</h2>
+                <p>Try another search.</p>
             </div>
         `;
 
@@ -150,26 +437,26 @@ function displayProducts(productList) {
     }
 
 
-    productList.forEach(product => {
+    list.forEach((product, index) => {
 
         const card =
-            document.createElement("div");
+            document.createElement("article");
 
         card.className = "product-card";
 
 
         card.innerHTML = `
 
-            <div class="product-image">
+            <div class="image-box">
 
                 <img
                     src="${product.image}"
                     alt="${product.name}"
                     loading="lazy"
-                    onerror="imageError(this)"
+                    onerror="this.src='https://loremflickr.com/700/700/herbal,product?lock=${index + 5000}'"
                 >
 
-                <span class="category-badge">
+                <span class="badge">
                     ${product.category}
                 </span>
 
@@ -178,86 +465,69 @@ function displayProducts(productList) {
 
             <div class="product-info">
 
+                <small>
+                    ${product.subcategory || product.category}
+                </small>
+
                 <h3>
                     ${product.name}
                 </h3>
 
-                <p>
-                    Natural Herbal Product
-                </p>
+                <button
+                    onclick="viewProduct(${products.indexOf(product)})">
 
+                    View Product →
 
-                <div class="product-bottom">
-
-                    <strong>
-                        ${product.price}
-                    </strong>
-
-                    <button
-                        onclick="openProduct(${product.id})">
-                        View
-                    </button>
-
-                </div>
+                </button>
 
             </div>
 
         `;
 
 
-        productsGrid.appendChild(card);
+        grid.appendChild(card);
 
     });
 
 }
 
 
-// ------------------------------------------------------
-// IMAGE ERROR HANDLER
-// ------------------------------------------------------
-
-function imageError(img) {
-
-    console.log("Image failed:", img.src);
-
-    img.src =
-        "https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=800";
-
-}
-
-
-// ------------------------------------------------------
-// SEARCH + FILTER
-// ------------------------------------------------------
+// =====================================================
+// SEARCH + CATEGORY
+// =====================================================
 
 function filterProducts() {
 
-    const search =
-        searchInput.value
-        .toLowerCase()
-        .trim();
+    const text =
+        search.value.toLowerCase().trim();
 
     const category =
-        categoryFilter.value;
+        select.value;
 
 
-    const filtered =
+    const result =
         products.filter(product => {
 
-            const matchesSearch =
+            const textMatch =
 
                 product.name
                     .toLowerCase()
-                    .includes(search)
+                    .includes(text)
 
                 ||
 
                 product.category
                     .toLowerCase()
-                    .includes(search);
+                    .includes(text)
+
+                ||
+
+                (product.subcategory || "")
+                    .toLowerCase()
+                    .includes(text);
 
 
-            const matchesCategory =
+            const categoryMatch =
 
                 category === "All"
 
@@ -266,98 +536,101 @@ function filterProducts() {
                 product.category === category;
 
 
-            return (
-                matchesSearch &&
-                matchesCategory
-            );
+            return textMatch && categoryMatch;
 
         });
 
 
-    displayProducts(filtered);
+    showProducts(result);
 
 }
 
 
-// ------------------------------------------------------
-// SEARCH EVENT
-// ------------------------------------------------------
-
-if (searchInput) {
-
-    searchInput.addEventListener(
-        "input",
-        filterProducts
-    );
-
-}
+search.addEventListener(
+    "input",
+    filterProducts
+);
 
 
-// ------------------------------------------------------
-// CATEGORY EVENT
-// ------------------------------------------------------
-
-if (categoryFilter) {
-
-    categoryFilter.addEventListener(
-        "change",
-        filterProducts
-    );
-
-}
+select.addEventListener(
+    "change",
+    filterProducts
+);
 
 
-// ------------------------------------------------------
-// PRODUCT POPUP
-// ------------------------------------------------------
+// =====================================================
+// CATEGORY BUTTONS
+// =====================================================
 
-function openProduct(id) {
+document
+    .querySelectorAll(".categories button")
+    .forEach(button => {
 
-    const product =
-        products.find(
-            item => item.id === id
+        button.addEventListener(
+            "click",
+            function() {
+
+                const category =
+                    this.dataset.category;
+
+                select.value = category;
+
+                filterProducts();
+
+                document
+                    .getElementById("products")
+                    .scrollIntoView({
+                        behavior: "smooth"
+                    });
+
+            }
         );
 
+    });
 
-    if (!product) return;
+
+// =====================================================
+// PRODUCT POPUP
+// =====================================================
+
+function viewProduct(index) {
+
+    const product =
+        products[index];
 
 
     const popup =
         document.createElement("div");
 
     popup.className =
-        "product-popup";
+        "popup";
 
 
     popup.innerHTML = `
 
         <div
-            class="popup-overlay"
-            onclick="closePopup()">
+            class="popup-bg"
+            onclick="closeProduct()">
         </div>
 
 
-        <div class="popup-box">
+        <div class="popup-content">
 
             <button
-                class="popup-close"
-                onclick="closePopup()">
+                class="close"
+                onclick="closeProduct()">
                 ×
             </button>
 
 
-            <div class="popup-image">
-
-                <img
-                    src="${product.image}"
-                    alt="${product.name}"
-                    onerror="imageError(this)"
-                >
-
-            </div>
+            <img
+                src="${product.image}"
+                alt="${product.name}"
+                onerror="this.src='https://loremflickr.com/700/700/herbal,product?lock=9999'"
+            >
 
 
-            <div class="popup-details">
+            <div class="popup-info">
 
                 <span>
                     ${product.category}
@@ -367,23 +640,31 @@ function openProduct(id) {
                     ${product.name}
                 </h2>
 
+                ${
+                    product.subcategory
+                    ?
+                    `<p>${product.subcategory}</p>`
+                    :
+                    ""
+                }
+
                 <p>
                     Natural herbal product from
-                    Susil Herbal.
+                    Susil Herbals.
                 </p>
 
-                <h3>
-                    ${product.price}
-                </h3>
 
+                <a
+                    class="popup-whatsapp"
+                    href="https://wa.me/919500245437?text=${encodeURIComponent(
+                        "Hello Susil Herbals, I am interested in " +
+                        product.name
+                    )}"
+                    target="_blank">
 
-                <button
-                    class="whatsapp-btn"
-                    onclick="whatsappEnquiry('${product.name}')">
+                    💬 Enquire on WhatsApp
 
-                    💬 WhatsApp Enquiry
-
-                </button>
+                </a>
 
             </div>
 
@@ -400,16 +681,14 @@ function openProduct(id) {
 }
 
 
-// ------------------------------------------------------
+// =====================================================
 // CLOSE POPUP
-// ------------------------------------------------------
+// =====================================================
 
-function closePopup() {
+function closeProduct() {
 
     const popup =
-        document.querySelector(
-            ".product-popup"
-        );
+        document.querySelector(".popup");
 
 
     if (popup) {
@@ -425,40 +704,9 @@ function closePopup() {
 }
 
 
-// ------------------------------------------------------
-// WHATSAPP
-// ------------------------------------------------------
-
-function whatsappEnquiry(productName) {
-
-    const phone =
-        "919500245437";
-
-
-    const message =
-        `Hello Susil Herbal,
-
-I am interested in:
-${productName}
-
-Please share more details.`;
-
-
-    const url =
-        `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-
-
-    window.open(
-        url,
-        "_blank"
-    );
-
-}
-
-
-// ------------------------------------------------------
-// ESC KEY
-// ------------------------------------------------------
+// =====================================================
+// ESCAPE KEY
+// =====================================================
 
 document.addEventListener(
     "keydown",
@@ -466,7 +714,7 @@ document.addEventListener(
 
         if (event.key === "Escape") {
 
-            closePopup();
+            closeProduct();
 
         }
 
@@ -474,16 +722,10 @@ document.addEventListener(
 );
 
 
-// ------------------------------------------------------
-// INITIAL LOAD
-// ------------------------------------------------------
+// =====================================================
+// LOAD ALL PRODUCTS
+// =====================================================
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function() {
+showProducts(products);
 
-        displayProducts(products);
-
-    }
-);
 ```
