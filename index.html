@@ -1,127 +1,234 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Susil Herbals</title>
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Susil Herbal | Natural Herbal Products</title>
+
+    <meta name="description"
+          content="Susil Herbal - Natural herbal products and wellness products.">
+
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<header>
+<!-- ================= HEADER ================= -->
+
+<header class="header">
+
     <div class="logo">
-        <h1>SUSIL HERBALS</h1>
-        <p>Best With Nature's Touch</p>
+        <span>🌿</span>
+        <div>
+            <h1>Susil Herbal</h1>
+            <small>Natural Wellness</small>
+        </div>
     </div>
 
     <nav>
-        <a href="#">Home</a>
-        <a href="#categories">Categories</a>
+        <a href="#home">Home</a>
         <a href="#products">Products</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
     </nav>
+
 </header>
 
-<section class="hero">
+
+<!-- ================= HERO ================= -->
+
+<section id="home" class="hero">
+
     <div class="hero-content">
-        <h1>Nature's Gift For Healthy Living</h1>
+
+        <span class="hero-small">
+            🌿 PURE • NATURAL • HERBAL
+        </span>
+
+        <h2>
+            Nature's Goodness,<br>
+            <strong>Delivered to You</strong>
+        </h2>
+
         <p>
-            100% Natural Products for Hair Care,
-            Skin Care, Food Care and Fresh Farm.
+            Discover our collection of natural herbal products
+            made with carefully selected ingredients.
         </p>
 
-        <a href="#products" class="btn">Shop Collection</a>
-    </div>
-</section>
-
-<section id="categories" class="categories">
-
-    <h2>Shop By Category</h2>
-
-    <div class="category-grid">
-
-        <div class="card">
-            <img src="images/haircare.jpg">
-            <h3>Hair Care</h3>
-        </div>
-
-        <div class="card">
-            <img src="images/skincare.jpg">
-            <h3>Skin Care</h3>
-        </div>
-
-        <div class="card">
-            <img src="images/foodcare.jpg">
-            <h3>Food Care</h3>
-        </div>
-
-        <div class="card">
-            <img src="images/freshfarm.jpg">
-            <h3>Fresh Farm</h3>
-        </div>
-
-        <div class="card">
-            <img src="images/cosmetic.jpg">
-            <h3>Cosmetic Collection</h3>
-        </div>
-
-        <div class="card">
-            <img src="images/newlaunch.jpg">
-            <h3>New Launch</h3>
-        </div>
+        <a href="#products" class="hero-btn">
+            Explore Products
+        </a>
 
     </div>
 
 </section>
 
-<section id="products" class="products">
 
-<h2>Featured Products</h2>
+<!-- ================= PRODUCTS ================= -->
 
-<div class="product-grid" id="productContainer">
+<section id="products" class="products-section">
 
-</div>
+    <div class="section-title">
+
+        <span>OUR COLLECTION</span>
+
+        <h2>Featured Herbal Products</h2>
+
+        <p>
+            Explore our range of natural herbal products
+        </p>
+
+    </div>
+
+
+    <!-- SEARCH -->
+
+    <div class="product-tools">
+
+        <input
+            type="text"
+            id="productSearch"
+            placeholder="🔍 Search products..."
+        >
+
+        <select id="categoryFilter">
+
+            <option value="All">All Categories</option>
+
+            <option value="Herbal Powder">
+                Herbal Powder
+            </option>
+
+            <option value="Hair Care">
+                Hair Care
+            </option>
+
+            <option value="Skin Care">
+                Skin Care
+            </option>
+
+            <option value="Herbal Tea">
+                Herbal Tea
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <!-- PRODUCTS WILL LOAD HERE -->
+
+    <div id="productsGrid" class="products-grid"></div>
+
 
 </section>
 
-<section id="about" class="about">
 
-<h2>About Susil Herbals</h2>
+<!-- ================= ABOUT ================= -->
 
-<p>
-Susil Herbals provides natural and herbal products
-for healthy living. All products are carefully
-prepared using traditional ingredients.
-</p>
+<section id="about" class="about-section">
+
+    <div class="about-content">
+
+        <span>ABOUT US</span>
+
+        <h2>
+            Natural Products.<br>
+            Trusted Quality.
+        </h2>
+
+        <p>
+            Susil Herbal brings together the goodness of nature
+            with carefully selected herbal ingredients.
+            Our goal is to provide quality herbal products
+            for everyday wellness.
+        </p>
+
+        <div class="about-points">
+
+            <div>
+                <strong>🌿</strong>
+                <span>Natural Ingredients</span>
+            </div>
+
+            <div>
+                <strong>✓</strong>
+                <span>Quality Products</span>
+            </div>
+
+            <div>
+                <strong>♥</strong>
+                <span>Customer Care</span>
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 
-<section id="contact" class="contact">
 
-<h2>Contact Us</h2>
+<!-- ================= CONTACT ================= -->
 
-<p>📞 +91 95002 44537</p>
-<p>📍 Sowcarpet, Chennai</p>
+<section id="contact" class="contact-section">
 
-<a
-href="https://wa.me/919500244537"
-class="whatsapp-btn"
-target="_blank">
+    <div class="section-title">
 
-<i class="fab fa-whatsapp"></i>
-Chat on WhatsApp
+        <span>GET IN TOUCH</span>
 
-</a>
+        <h2>Contact Susil Herbal</h2>
+
+        <p>
+            Interested in our products? Contact us today.
+        </p>
+
+    </div>
+
+    <div class="contact-box">
+
+        <div>
+            <strong>📱 Phone</strong>
+            <p>+91 95002 45437</p>
+        </div>
+
+        <div>
+            <strong>💬 WhatsApp</strong>
+            <p>Quick Product Enquiry</p>
+        </div>
+
+        <div>
+            <strong>🌿 Susil Herbal</strong>
+            <p>Natural Herbal Products</p>
+        </div>
+
+    </div>
 
 </section>
+
+
+<!-- ================= FOOTER ================= -->
 
 <footer>
-© 2025 Susil Herbals. All Rights Reserved.
+
+    <h3>🌿 Susil Herbal</h3>
+
+    <p>
+        Natural Wellness • Herbal Goodness
+    </p>
+
+    <small>
+        © 2026 Susil Herbal. Demo Website.
+    </small>
+
 </footer>
+
+
+<!-- ================= SCRIPT ================= -->
 
 <script src="script.js"></script>
 
 </body>
 </html>
+```
